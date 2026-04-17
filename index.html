@@ -1,361 +1,308 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>FitBook — The Platform for Serious Coaching</title>
-  <meta name="description" content="FitBook connects elite trainers with dedicated trainees. Personalized programs, real-time tracking, seamless communication.">
-  <meta name="theme-color" content="#060C14">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FitBook — The Platform for Serious Coaching</title>
+<meta name="description" content="FitBook connects elite trainers with dedicated trainees. Personalized programs, real-time tracking, seamless communication.">
+<meta name="theme-color" content="#060C14">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<!-- Custom cursor (desktop only, hidden via CSS on mobile) -->
+<div class="cur-ring" id="curRing"></div>
+<div class="cur-dot" id="curDot"></div>
+
+<!-- Scroll progress bar -->
+<div class="scroll-bar" id="scrollBar"></div>
 
 <!-- NAV -->
 <nav class="nav" id="nav">
   <div class="w nav-r">
-    <a href="#" class="logo"><span class="logo-i"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#060C14" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><path d="M16 8 2 22M17.5 15H9"/></svg></span>FitBook</a>
-    <div class="nav-l" id="navL"><a href="#features">Features</a><a href="#showcase">App</a><a href="#trainers">Trainers</a><a href="#trainees">Trainees</a></div>
-    <a href="#waitlist" class="nav-cta">Get Early Access</a>
+    <a href="#" class="logo" data-hover><span class="logo-i"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#060C14" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><path d="M16 8 2 22M17.5 15H9"/></svg></span>FitBook</a>
+    <div class="nav-l" id="navL"><a href="#features" data-hover>Features</a><a href="#showcase" data-hover>App</a><a href="#trainers" data-hover>Trainers</a><a href="#trainees" data-hover>Trainees</a></div>
+    <a href="#waitlist" class="nav-cta" data-hover data-magnetic>Get Early Access</a>
     <button class="burger" id="burger" aria-label="Menu"><span></span><span></span></button>
   </div>
 </nav>
 
-<!-- ════════════════════════════════════════════════════════════════
-     HERO — phone cluster is the centerpiece
-     ════════════════════════════════════════════════════════════════ -->
-<section class="hero">
+<!-- ═══════════════════════ HERO ═══════════════════════ -->
+<section class="hero" id="top">
+  <canvas class="particles" id="particles"></canvas>
   <div class="hero-bg" aria-hidden="true">
-    <div class="hero-grid"></div>
-    <div class="orb orb-hero-1"></div>
-    <div class="orb orb-hero-2"></div>
-    <div class="orb orb-hero-3"></div>
-    <!-- floating 3D shapes -->
-    <div class="float-shape fs-ring fs-1" data-parallax="-0.08"></div>
-    <div class="float-shape fs-diamond fs-2" data-parallax="0.12"></div>
-    <div class="float-shape fs-cross fs-3" data-parallax="-0.06"></div>
-    <div class="float-shape fs-ring fs-4" data-parallax="0.1"></div>
-    <div class="float-shape fs-dot fs-5" data-parallax="-0.15"></div>
-    <div class="float-shape fs-diamond fs-6" data-parallax="0.07"></div>
+    <div class="hero-grid" data-speed="0.15"></div>
+    <div class="orb orb-1" id="orb1"></div>
+    <div class="orb orb-2" id="orb2"></div>
+    <div class="orb orb-3" id="orb3"></div>
+    <div class="float-shape fs-ring" style="width:90px;height:90px;top:15%;right:12%" data-speed="-0.08"></div>
+    <div class="float-shape fs-diamond" style="width:14px;height:14px;top:28%;left:10%" data-speed="0.12"></div>
+    <div class="float-shape fs-dot" style="width:6px;height:6px;top:20%;left:32%" data-speed="-0.14"></div>
+    <div class="float-shape fs-ring" style="width:50px;height:50px;bottom:22%;left:6%" data-speed="0.09"></div>
+    <div class="float-shape fs-diamond" style="width:10px;height:10px;bottom:30%;right:20%" data-speed="0.07"></div>
   </div>
+
   <div class="w hero-wrap">
-    <div class="hero-top an" data-d="0">
-      <div class="pill"><span class="pill-dot"></span>Coming Soon — iOS &amp; Android</div>
-      <h1 class="hero-h1">The platform for<br><em>serious coaching.</em></h1>
-      <p class="hero-p">Personalized programs, real-time tracking, and seamless trainer-trainee communication — everything the fitness industry has been missing.</p>
-      <div class="hero-ctas">
-        <a href="#waitlist" class="btn btn-gold btn-xl">Join the Waitlist <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-        <a href="#features" class="btn btn-ghost btn-xl">Explore Features</a>
+    <div class="hero-text" id="heroText" data-speed="0.2">
+      <div class="pill an" data-d="0"><span class="pill-dot"></span>Coming Soon — iOS &amp; Android</div>
+      <h1 class="hero-h1" data-split>The platform for serious coaching.</h1>
+      <p class="hero-p an" data-d="2">Personalized programs. Real-time tracking. Seamless trainer-trainee communication. Everything the fitness industry has been missing — in one app.</p>
+      <div class="hero-ctas an" data-d="3">
+        <a href="#waitlist" class="btn btn-gold btn-xl" data-magnetic data-hover>Join the Waitlist <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a href="#features" class="btn btn-ghost btn-xl" data-hover>Explore Features</a>
       </div>
     </div>
+
     <!-- PHONE CLUSTER -->
-    <div class="phones an" data-d="1">
-      <div class="phone phone-side phone-left">
-        <div class="ph-frame ph-sm">
-          <div class="ph-notch-sm"></div>
-          <div class="ph-scr">
-            <div class="ph-hdr-sm">Schedule</div>
-            <div class="ph-sched-item"><span class="ph-time">7:00 AM</span><b>Upper Body Push</b><span class="ph-meta">6 exercises</span></div>
-            <div class="ph-sched-item ph-sched-active"><span class="ph-time">8:30 AM</span><b>Breakfast</b><span class="ph-meta">640 kcal</span></div>
-            <div class="ph-sched-item"><span class="ph-time">12:30 PM</span><b>Lunch</b><span class="ph-meta">720 kcal</span></div>
-            <div class="ph-sched-item"><span class="ph-time">3:00 PM</span><b>Supplements</b><span class="ph-meta">Creatine · Omega</span></div>
-          </div>
-        </div>
+    <div class="phones an" data-d="1" data-speed="-0.1">
+      <!-- Side left: Schedule -->
+      <div class="phone phone-side phone-l">
+        <div class="ph ph-sm"><div class="ph-notch-s"></div><div class="ph-scr">
+          <div class="ph-lbl">Schedule</div>
+          <div class="ph-si"><span class="ph-t">7:00 AM</span><b>Upper Body Push</b><small>6 exercises</small></div>
+          <div class="ph-si ph-si-a"><span class="ph-t">8:30 AM</span><b>Breakfast</b><small>640 kcal</small></div>
+          <div class="ph-si"><span class="ph-t">12:30 PM</span><b>Lunch</b><small>720 kcal</small></div>
+          <div class="ph-si"><span class="ph-t">3:00 PM</span><b>Supplements</b><small>Creatine · Omega</small></div>
+        </div></div>
       </div>
-      <div class="phone phone-main">
-        <div class="ph-frame">
+      <!-- Main center phone: Home -->
+      <div class="phone phone-main" id="phoneMain">
+        <div class="ph ph-main-frame" id="phoneFrame">
           <div class="ph-island"><span class="ph-cam"></span></div>
           <div class="ph-scr ph-scr-main">
-            <div class="ph-status"><span>9:41</span></div>
+            <div class="ph-bar"><span>9:41</span></div>
             <div class="ph-greet"><div class="ph-av"></div><div><small>Good morning</small><b>Sarah</b></div></div>
-            <div class="ph-workout-card">
-              <small>TODAY'S WORKOUT</small>
-              <div class="ph-wk-title">Upper Body Push</div>
-              <div class="ph-wk-meta">6 exercises · ~45 min</div>
-              <div class="ph-wk-bar"><div class="ph-wk-bar-fill"></div></div>
-              <div class="ph-wk-btn">Go to Workout →</div>
-            </div>
-            <div class="ph-stats-row">
+            <div class="ph-wk"><small>TODAY'S WORKOUT</small><div class="ph-wk-t">Upper Body Push</div><div class="ph-wk-m">6 exercises · ~45 min</div><div class="ph-wk-prog"><div class="ph-wk-prog-fill"></div></div><div class="ph-wk-btn">Go to Workout →</div></div>
+            <div class="ph-row">
               <div class="ph-mini"><svg class="ph-ring" viewBox="0 0 36 36"><circle cx="18" cy="18" r="14" fill="none" stroke="#1C2540" stroke-width="3"/><circle cx="18" cy="18" r="14" fill="none" stroke="#F0B51D" stroke-width="3" stroke-dasharray="58 100" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg><b>4<small>/6</small></b><span>This week</span></div>
-              <div class="ph-mini"><div class="ph-emoji">🔥</div><b>12</b><span>Day streak</span></div>
+              <div class="ph-mini"><div class="ph-emo">🔥</div><b>12</b><span>Day streak</span></div>
               <div class="ph-mini"><svg class="ph-ring" viewBox="0 0 36 36"><circle cx="18" cy="18" r="14" fill="none" stroke="#1C2540" stroke-width="3"/><circle cx="18" cy="18" r="14" fill="none" stroke="#34C759" stroke-width="3" stroke-dasharray="72 100" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg><b>1,840</b><span>kcal today</span></div>
             </div>
-            <div class="ph-home-ind"></div>
+            <div class="ph-home-bar"></div>
           </div>
         </div>
         <div class="ph-glow"></div>
         <div class="ph-shadow"></div>
       </div>
-      <div class="phone phone-side phone-right">
-        <div class="ph-frame ph-sm">
-          <div class="ph-notch-sm"></div>
-          <div class="ph-scr">
-            <div class="ph-hdr-sm">Meals</div>
-            <div class="ph-meal-card">
-              <div class="ph-meal-row"><span class="ph-meal-dot ph-meal-dot-p"></span><b>Protein</b><span>142g</span></div>
-              <div class="ph-meal-row"><span class="ph-meal-dot ph-meal-dot-c"></span><b>Carbs</b><span>210g</span></div>
-              <div class="ph-meal-row"><span class="ph-meal-dot ph-meal-dot-f"></span><b>Fat</b><span>58g</span></div>
-              <div class="ph-meal-total">1,840 / 2,200 kcal</div>
-            </div>
-            <div class="ph-meal-item"><b>Breakfast</b><span>640 kcal</span></div>
-            <div class="ph-meal-item"><b>Lunch</b><span>720 kcal</span></div>
+      <!-- Side right: Meals -->
+      <div class="phone phone-side phone-r">
+        <div class="ph ph-sm"><div class="ph-notch-s"></div><div class="ph-scr">
+          <div class="ph-lbl">Meals</div>
+          <div class="ph-macro-card">
+            <div class="ph-macro-r"><span class="ph-dot ph-dot-p"></span><b>Protein</b><span>142g</span></div>
+            <div class="ph-macro-r"><span class="ph-dot ph-dot-c"></span><b>Carbs</b><span>210g</span></div>
+            <div class="ph-macro-r"><span class="ph-dot ph-dot-f"></span><b>Fat</b><span>58g</span></div>
+            <div class="ph-macro-total">1,840 / 2,200 kcal</div>
           </div>
-        </div>
+          <div class="ph-meal-i"><b>Breakfast</b><small>640 kcal</small></div>
+          <div class="ph-meal-i"><b>Lunch</b><small>720 kcal</small></div>
+        </div></div>
       </div>
+    </div>
+  </div>
+
+  <!-- Stats strip -->
+  <div class="stats-strip">
+    <div class="w stats-row">
+      <div class="stat an" data-d="0"><b class="counter" data-target="2400">0</b><span>Beta Signups</span></div>
+      <div class="stat-sep"></div>
+      <div class="stat an" data-d="1"><b class="counter" data-target="50">0</b><span>Coaches</span></div>
+      <div class="stat-sep"></div>
+      <div class="stat an" data-d="2"><b class="counter" data-target="1300">0</b><span>Exercises</span></div>
+      <div class="stat-sep"></div>
+      <div class="stat an" data-d="3"><b class="counter" data-target="100">0</b><span>% Offline</span></div>
     </div>
   </div>
 </section>
 
-<!-- STATS STRIP with animated counters -->
-<section class="stats-strip">
-  <div class="w stats-row">
-    <div class="stat-i an" data-d="0"><b class="counter" data-target="2400">0</b><span>Beta Signups</span></div>
-    <div class="stat-sep"></div>
-    <div class="stat-i an" data-d="1"><b class="counter" data-target="50">0</b><span>Coaches Joined</span></div>
-    <div class="stat-sep"></div>
-    <div class="stat-i an" data-d="2"><b class="counter" data-target="1300">0</b><span>Exercises</span></div>
-    <div class="stat-sep"></div>
-    <div class="stat-i an" data-d="3"><b class="counter" data-target="100">0</b><span>% Offline Ready</span></div>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════════════════════════════
-     FEATURES — each with visual mini-app mockup
-     ════════════════════════════════════════════════════════════════ -->
+<!-- ═══════════════════════ FEATURES ═══════════════════════ -->
 <section class="sec" id="features">
-  <div class="orb orb-feat" aria-hidden="true"></div>
+  <div class="orb orb-sec" style="right:-250px;top:10%" aria-hidden="true"></div>
   <div class="w">
-    <header class="sec-hd an" data-p="-0.05" data-d="0">
+    <header class="sec-hd an" data-d="0" data-speed="-0.04">
       <span class="tag">Features</span>
       <h2>Everything a coach<br>and athlete need.</h2>
       <p>Built for the reality of serious coaching.</p>
     </header>
     <div class="feat-grid">
-      <!-- 1: Workout Tracking -->
-      <div class="fc an" data-scroll-scale data-d="0">
-        <div class="fc-shine"></div><div class="fc-visual">
-          <div class="mini-app mini-workout">
-            <div class="mw-head">Workout Log</div>
-            <div class="mw-ex"><span class="mw-ex-name">Bench Press</span><div class="mw-sets"><span class="mw-set">80kg×10</span><span class="mw-set">85kg×8</span><span class="mw-set mw-set-active">90kg×6</span></div></div>
-            <div class="mw-ex"><span class="mw-ex-name">Incline DB</span><div class="mw-sets"><span class="mw-set">30kg×12</span><span class="mw-set">32kg×10</span></div></div>
-            <div class="mw-btn-row"><span class="mw-btn">+ Add Set</span><span class="mw-btn mw-btn-gold">Complete ✓</span></div>
-          </div>
-        </div>
+      <!-- Workout -->
+      <div class="fc an" data-d="0" data-tilt="8">
+        <div class="fc-shine"></div>
+        <div class="fc-vis"><div class="mini mini-wk">
+          <div class="mini-h">Workout Log</div>
+          <div class="mw-ex"><span>Bench Press</span><div class="mw-sets"><i>80kg×10</i><i>85kg×8</i><i class="mw-a">90kg×6</i></div></div>
+          <div class="mw-ex"><span>Incline DB</span><div class="mw-sets"><i>30kg×12</i><i>32kg×10</i></div></div>
+          <div class="mw-btns"><span class="mw-b">+ Add Set</span><span class="mw-b mw-b-g">Complete ✓</span></div>
+        </div></div>
         <h3>Workout Tracking</h3>
-        <p>Log every set and rep. Track personal records. See your history and progression at a glance.</p>
+        <p>Log every set and rep. Track PRs. See history and progression at a glance.</p>
       </div>
-      <!-- 2: Meal Planning -->
-      <div class="fc an" data-scroll-scale data-d="1">
-        <div class="fc-shine"></div><div class="fc-visual">
-          <div class="mini-app mini-meal">
-            <div class="mw-head">Today's Meals</div>
-            <div class="mm-card"><div class="mm-icon">🥣</div><div><b>Breakfast</b><span>Oats, eggs, avocado</span></div><b class="mm-kcal">640</b></div>
-            <div class="mm-card"><div class="mm-icon">🥗</div><div><b>Lunch</b><span>Chicken, rice, broc.</span></div><b class="mm-kcal">720</b></div>
-            <div class="mm-macros"><div class="mm-bar"><div class="mm-bar-fill mm-bar-p" style="width:65%"></div></div><div class="mm-bar"><div class="mm-bar-fill mm-bar-c" style="width:55%"></div></div><div class="mm-bar"><div class="mm-bar-fill mm-bar-f" style="width:40%"></div></div></div>
-          </div>
-        </div>
+      <!-- Meals -->
+      <div class="fc an" data-d="1" data-tilt="8">
+        <div class="fc-shine"></div>
+        <div class="fc-vis"><div class="mini mini-ml">
+          <div class="mini-h">Today's Meals</div>
+          <div class="mm-c"><div class="mm-i">🥣</div><div><b>Breakfast</b><small>Oats, eggs, avocado</small></div><b class="mm-k">640</b></div>
+          <div class="mm-c"><div class="mm-i">🥗</div><div><b>Lunch</b><small>Chicken, rice, broc.</small></div><b class="mm-k">720</b></div>
+          <div class="mm-bars"><div class="mm-bar"><div class="mm-bar-f mm-bar-p" style="width:65%"></div></div><div class="mm-bar"><div class="mm-bar-f mm-bar-c" style="width:55%"></div></div><div class="mm-bar"><div class="mm-bar-f mm-bar-ft" style="width:40%"></div></div></div>
+        </div></div>
         <h3>Meal Planning</h3>
-        <p>Macro-tracked meal plans with per-ingredient breakdowns. Calorie sliders for logging intake.</p>
+        <p>Macro-tracked meal plans with per-ingredient breakdowns and calorie sliders.</p>
       </div>
-      <!-- 3: Chat -->
-      <div class="fc an" data-scroll-scale data-d="2">
-        <div class="fc-shine"></div><div class="fc-visual">
-          <div class="mini-app mini-chat">
-            <div class="mw-head">Messages</div>
-            <div class="mc-bubble mc-bubble-them"><b>Coach Ali</b><span>Great session today! Let's increase bench weight next week.</span></div>
-            <div class="mc-bubble mc-bubble-me"><span>Thanks coach! Feeling strong 💪</span></div>
-            <div class="mc-input"><span>Type a message...</span></div>
-          </div>
-        </div>
+      <!-- Chat -->
+      <div class="fc an" data-d="2" data-tilt="8">
+        <div class="fc-shine"></div>
+        <div class="fc-vis"><div class="mini mini-ch">
+          <div class="mini-h">Messages</div>
+          <div class="mc-b mc-them"><b>Coach Ali</b><span>Great session! Let's increase bench next week.</span></div>
+          <div class="mc-b mc-me"><span>Thanks coach! Feeling strong 💪</span></div>
+          <div class="mc-inp"><span>Type a message...</span></div>
+        </div></div>
         <h3>Built-In Chat</h3>
-        <p>Real-time encrypted messaging. Share updates, celebrate wins, stay connected with your coach.</p>
+        <p>Real-time encrypted messaging. Share updates, celebrate wins, stay connected.</p>
       </div>
-      <!-- 4: Progress -->
-      <div class="fc an" data-scroll-scale data-d="3">
-        <div class="fc-shine"></div><div class="fc-visual">
-          <div class="mini-app mini-progress">
-            <div class="mw-head">Progress</div>
-            <div class="mp-chart"><div class="mp-bar" style="height:30%"></div><div class="mp-bar" style="height:45%"></div><div class="mp-bar" style="height:40%"></div><div class="mp-bar" style="height:60%"></div><div class="mp-bar" style="height:55%"></div><div class="mp-bar mp-bar-active" style="height:75%"></div></div>
-            <div class="mp-label"><span>Bench Press 1RM</span><b>+12kg</b></div>
-          </div>
-        </div>
+      <!-- Progress -->
+      <div class="fc an" data-d="3" data-tilt="8">
+        <div class="fc-shine"></div>
+        <div class="fc-vis"><div class="mini mini-pr">
+          <div class="mini-h">Progress</div>
+          <div class="mp-chart"><div class="mp-b" style="height:30%"></div><div class="mp-b" style="height:45%"></div><div class="mp-b" style="height:40%"></div><div class="mp-b" style="height:60%"></div><div class="mp-b" style="height:55%"></div><div class="mp-b mp-b-a" style="height:78%"></div></div>
+          <div class="mp-lbl"><span>Bench Press 1RM</span><b>+12kg</b></div>
+        </div></div>
         <h3>Live Progress</h3>
-        <p>Track PRs, streaks, and body composition. Beautiful charts that show your growth over time.</p>
+        <p>Track PRs, streaks, and body composition with beautiful charts.</p>
       </div>
-      <!-- 5: AI -->
-      <div class="fc an" data-scroll-scale data-d="4">
-        <div class="fc-shine"></div><div class="fc-visual">
-          <div class="mini-app mini-ai">
-            <div class="mw-head">AI Generate</div>
-            <div class="ma-prompt"><span class="ma-cursor">|</span> 4-day upper/lower split for intermediate...</div>
-            <div class="ma-result"><div class="ma-day"><b>Day 1</b><span>Upper Push</span></div><div class="ma-day"><b>Day 2</b><span>Lower</span></div><div class="ma-day"><b>Day 3</b><span>Upper Pull</span></div><div class="ma-day ma-day-fade"><b>Day 4</b><span>Lower</span></div></div>
-          </div>
-        </div>
+      <!-- AI -->
+      <div class="fc an" data-d="4" data-tilt="8">
+        <div class="fc-shine"></div>
+        <div class="fc-vis"><div class="mini mini-ai">
+          <div class="mini-h">AI Generate</div>
+          <div class="ma-p"><span class="ma-cur">|</span> 4-day upper/lower split for intermediate...</div>
+          <div class="ma-res"><div class="ma-d"><b>Day 1</b><span>Upper Push</span></div><div class="ma-d"><b>Day 2</b><span>Lower</span></div><div class="ma-d"><b>Day 3</b><span>Upper Pull</span></div><div class="ma-d ma-d-f"><b>Day 4</b><span>Lower</span></div></div>
+        </div></div>
         <h3>AI Workouts</h3>
-        <p>Generate complete plans in seconds. Set parameters, let AI build, then customize to perfection.</p>
+        <p>Generate plans in seconds. Set parameters, let AI build, then customize.</p>
       </div>
-      <!-- 6: Offline -->
-      <div class="fc an" data-scroll-scale data-d="5">
-        <div class="fc-shine"></div><div class="fc-visual">
-          <div class="mini-app mini-offline">
-            <div class="mw-head">Status</div>
-            <div class="mo-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#F0B51D" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4" stroke="#34C759" stroke-width="2"/></svg></div>
-            <div class="mo-status">All data synced</div>
-            <div class="mo-bar"><div class="mo-bar-fill"></div></div>
-            <div class="mo-text">Works without internet</div>
-          </div>
-        </div>
+      <!-- Offline -->
+      <div class="fc an" data-d="5" data-tilt="8">
+        <div class="fc-shine"></div>
+        <div class="fc-vis"><div class="mini mini-of">
+          <div class="mini-h">Status</div>
+          <div class="mo-ic"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#F0B51D" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4" stroke="#34C759" stroke-width="2"/></svg></div>
+          <div class="mo-s">All data synced</div>
+          <div class="mo-bar"><div class="mo-bar-f"></div></div>
+          <div class="mo-t">Works without internet</div>
+        </div></div>
         <h3>Offline-First</h3>
-        <p>Full offline support with smart sync. Log workouts anywhere — even with zero signal.</p>
+        <p>Full offline support with smart sync. Log workouts anywhere.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════════════════════════
-     HOW IT WORKS — with visual scenes
-     ════════════════════════════════════════════════════════════════ -->
+<!-- ═══════════════════════ HOW IT WORKS ═══════════════════════ -->
 <section class="sec sec-alt" id="how">
   <div class="w">
-    <header class="sec-hd an" data-p="-0.05" data-d="0">
+    <header class="sec-hd an" data-d="0" data-speed="-0.04">
       <span class="tag">How It Works</span>
       <h2>From zero to first rep<br>in <em>under 3 minutes.</em></h2>
     </header>
     <div class="how-grid">
       <div class="how-step an" data-d="0">
-        <div class="how-vis">
-          <div class="how-scene how-scene-1">
-            <div class="hs-phone-mini"><div class="hs-role hs-role-t">🏋️ Trainer</div><div class="hs-role hs-role-a">🏃 Trainee</div></div>
-          </div>
-        </div>
-        <div class="how-num">01</div>
-        <h3>Create your profile</h3>
-        <p>Choose your role, set your goals, enter your metrics. Our 5-step onboarding takes under 2 minutes.</p>
+        <div class="how-vis"><div class="hs" data-tilt="14"><div class="hs-ph"><div class="hs-role hs-role-t">🏋️ Trainer</div><div class="hs-role hs-role-a">🏃 Trainee</div></div></div></div>
+        <div class="how-n">01</div><h3>Create your profile</h3><p>Choose your role, set goals, enter metrics. Under 2 minutes.</p>
       </div>
       <div class="how-step an" data-d="1">
-        <div class="how-vis">
-          <div class="how-scene how-scene-2">
-            <div class="hs-phone-l"></div>
-            <div class="hs-conn"><svg width="40" height="20" viewBox="0 0 40 20"><path d="M0 10h40" stroke="#F0B51D" stroke-width="2" stroke-dasharray="4 4"/><circle cx="20" cy="10" r="4" fill="#F0B51D"/></svg></div>
-            <div class="hs-phone-r"></div>
-          </div>
-        </div>
-        <div class="how-num">02</div>
-        <h3>Connect with your coach</h3>
-        <p>Find a trainer or share your invite link. One tap to connect — they build your program from there.</p>
+        <div class="how-vis"><div class="hs" data-tilt="14"><div class="hs-conn"><div class="hs-ph-s"></div><svg width="40" height="20" viewBox="0 0 40 20"><path d="M0 10h40" stroke="#F0B51D" stroke-width="2" stroke-dasharray="4 4"><animate attributeName="stroke-dashoffset" from="8" to="0" dur="1s" repeatCount="indefinite"/></path><circle cx="20" cy="10" r="3.5" fill="#F0B51D"><animate attributeName="r" values="3;4.5;3" dur="1.5s" repeatCount="indefinite"/></circle></svg><div class="hs-ph-s"></div></div></div></div>
+        <div class="how-n">02</div><h3>Connect with your coach</h3><p>Find a trainer or share your invite link. One tap.</p>
       </div>
       <div class="how-step an" data-d="2">
-        <div class="how-vis">
-          <div class="how-scene how-scene-3">
-            <div class="hs-phone-mini"><div class="hs-bars"><div class="hs-b" style="height:30%"></div><div class="hs-b" style="height:50%"></div><div class="hs-b" style="height:45%"></div><div class="hs-b" style="height:70%"></div><div class="hs-b" style="height:65%"></div><div class="hs-b hs-b-active" style="height:85%"></div></div></div>
-          </div>
-        </div>
-        <div class="how-num">03</div>
-        <h3>Follow your program</h3>
-        <p>Daily workouts, meals, and supplements. Log every set, track every meal, watch your progress grow.</p>
+        <div class="how-vis"><div class="hs" data-tilt="14"><div class="hs-ph"><div class="hs-bars"><div class="hs-b" style="height:25%"></div><div class="hs-b" style="height:40%"></div><div class="hs-b" style="height:50%"></div><div class="hs-b" style="height:45%"></div><div class="hs-b" style="height:65%"></div><div class="hs-b hs-b-a" style="height:85%"></div></div></div></div></div>
+        <div class="how-n">03</div><h3>Follow your program</h3><p>Daily workouts, meals, supplements. Log everything.</p>
       </div>
       <div class="how-step an" data-d="3">
-        <div class="how-vis">
-          <div class="how-scene how-scene-4">
-            <div class="hs-phone-mini"><div class="hs-trophy">🏆</div><div class="hs-pr">New PR!</div></div>
-          </div>
-        </div>
-        <div class="how-num">04</div>
-        <h3>See real results</h3>
-        <p>Streaks, personal records, body composition trends. Your trainer adjusts as you progress.</p>
+        <div class="how-vis"><div class="hs" data-tilt="14"><div class="hs-ph"><div class="hs-trophy">🏆</div><div class="hs-pr-t">New PR!</div></div></div></div>
+        <div class="how-n">04</div><h3>See real results</h3><p>Streaks, PRs, body composition. Coach adjusts as you grow.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════════════════════════
-     APP SHOWCASE — horizontal phone strip
-     ════════════════════════════════════════════════════════════════ -->
+<!-- ═══════════════════════ SHOWCASE ═══════════════════════ -->
 <section class="sec showcase" id="showcase">
-  <div class="w"><header class="sec-hd an" data-p="-0.05" data-d="0"><span class="tag">The App</span><h2>Every screen, crafted<br>with <em>obsessive detail.</em></h2></header></div>
-  <div class="showcase-track an" data-d="1">
-    <div class="showcase-scroll" id="showcaseScroll">
-      <div class="sc-phone"><div class="sc-frame"><div class="sc-notch"></div><div class="sc-scr"><div class="sc-label">Home</div><div class="sc-mock-greet"><div class="sc-av"></div><b>Good morning, Sarah</b></div><div class="sc-mock-card sc-mock-gold">Upper Body Push<br><small>6 exercises · 45min</small></div><div class="sc-mock-stats"><span>4/6 week</span><span>🔥 12</span><span>1,840 kcal</span></div></div></div><span class="sc-cap">Home Screen</span></div>
-      <div class="sc-phone"><div class="sc-frame"><div class="sc-notch"></div><div class="sc-scr"><div class="sc-label">Schedule</div><div class="sc-sched"><div class="sc-sh-item">7:00 AM · Workout</div><div class="sc-sh-item sc-sh-active">8:30 AM · Breakfast</div><div class="sc-sh-item">12:30 PM · Lunch</div><div class="sc-sh-item">6:00 PM · Dinner</div></div></div></div><span class="sc-cap">Daily Schedule</span></div>
-      <div class="sc-phone"><div class="sc-frame"><div class="sc-notch"></div><div class="sc-scr"><div class="sc-label">Workout</div><div class="sc-ex">Bench Press<div class="sc-ex-sets"><span>80kg×10 ✓</span><span>85kg×8 ✓</span><span class="sc-ex-cur">90kg×6</span></div></div><div class="sc-ex">Incline DB<div class="sc-ex-sets"><span>30kg×12 ✓</span><span class="sc-ex-cur">32kg×10</span></div></div></div></div><span class="sc-cap">Workout Logging</span></div>
-      <div class="sc-phone"><div class="sc-frame"><div class="sc-notch"></div><div class="sc-scr"><div class="sc-label">Meals</div><div class="sc-meal-ring"></div><div class="sc-meal-info"><b>1,840 / 2,200</b><span>kcal consumed</span></div><div class="sc-meal-list"><span>🥣 Breakfast · 640</span><span>🥗 Lunch · 720</span><span>🍗 Dinner · 480</span></div></div></div><span class="sc-cap">Meal Tracking</span></div>
-      <div class="sc-phone"><div class="sc-frame"><div class="sc-notch"></div><div class="sc-scr"><div class="sc-label">Progress</div><div class="sc-chart"><div class="sc-chart-bar" style="height:35%"></div><div class="sc-chart-bar" style="height:45%"></div><div class="sc-chart-bar" style="height:55%"></div><div class="sc-chart-bar" style="height:50%"></div><div class="sc-chart-bar" style="height:65%"></div><div class="sc-chart-bar sc-chart-bar-gold" style="height:80%"></div></div><div class="sc-pr-label"><b>Bench 1RM</b><span class="sc-pr-up">↑ 12kg</span></div></div></div><span class="sc-cap">Progress Charts</span></div>
-      <div class="sc-phone"><div class="sc-frame"><div class="sc-notch"></div><div class="sc-scr"><div class="sc-label">Chat</div><div class="sc-chat-bub sc-chat-them">Great session! Let's add weight next week 💪</div><div class="sc-chat-bub sc-chat-me">Thanks coach! Feeling strong</div><div class="sc-chat-bub sc-chat-them">Your form on squats was perfect today</div></div></div><span class="sc-cap">In-App Chat</span></div>
+  <div class="w"><header class="sec-hd an" data-d="0"><span class="tag">The App</span><h2>Every screen, crafted<br>with <em>obsessive detail.</em></h2></header></div>
+  <div class="sc-track an" data-d="1">
+    <div class="sc-scroll" id="scScroll">
+      <div class="sc-ph" data-tilt="10"><div class="sc-f"><div class="sc-n"></div><div class="sc-s"><div class="sc-l">Home</div><div class="sc-g"><div class="sc-av"></div><b>Good morning, Sarah</b></div><div class="sc-card sc-card-g">Upper Body Push<br><small>6 exercises · 45min</small></div><div class="sc-stats"><span>4/6 week</span><span>🔥 12</span><span>1,840 kcal</span></div></div></div><span class="sc-cap">Home Screen</span></div>
+      <div class="sc-ph" data-tilt="10"><div class="sc-f"><div class="sc-n"></div><div class="sc-s"><div class="sc-l">Schedule</div><div class="sc-si">7:00 AM · Workout</div><div class="sc-si sc-si-a">8:30 AM · Breakfast</div><div class="sc-si">12:30 PM · Lunch</div><div class="sc-si">6:00 PM · Dinner</div></div></div><span class="sc-cap">Daily Schedule</span></div>
+      <div class="sc-ph" data-tilt="10"><div class="sc-f"><div class="sc-n"></div><div class="sc-s"><div class="sc-l">Workout</div><div class="sc-ex">Bench Press<div class="sc-ex-s"><span>80×10 ✓</span><span>85×8 ✓</span><span class="sc-ex-c">90×6</span></div></div><div class="sc-ex">Incline DB<div class="sc-ex-s"><span>30×12 ✓</span><span class="sc-ex-c">32×10</span></div></div></div></div><span class="sc-cap">Workout Log</span></div>
+      <div class="sc-ph" data-tilt="10"><div class="sc-f"><div class="sc-n"></div><div class="sc-s"><div class="sc-l">Meals</div><div class="sc-meal-ring"></div><div class="sc-meal-info"><b>1,840 / 2,200</b><small>kcal consumed</small></div><div class="sc-meal-list"><span>🥣 Breakfast · 640</span><span>🥗 Lunch · 720</span><span>🍗 Dinner · 480</span></div></div></div><span class="sc-cap">Meal Tracking</span></div>
+      <div class="sc-ph" data-tilt="10"><div class="sc-f"><div class="sc-n"></div><div class="sc-s"><div class="sc-l">Progress</div><div class="sc-chart"><div class="sc-cb" style="height:35%"></div><div class="sc-cb" style="height:50%"></div><div class="sc-cb" style="height:55%"></div><div class="sc-cb" style="height:48%"></div><div class="sc-cb" style="height:68%"></div><div class="sc-cb sc-cb-g" style="height:82%"></div></div><div class="sc-pr"><b>Bench 1RM</b><span class="sc-pr-up">↑ 12kg</span></div></div></div><span class="sc-cap">Progress Charts</span></div>
+      <div class="sc-ph" data-tilt="10"><div class="sc-f"><div class="sc-n"></div><div class="sc-s"><div class="sc-l">Chat</div><div class="sc-chat-b sc-chat-t">Great session! Let's increase weight 💪</div><div class="sc-chat-b sc-chat-m">Thanks coach! Feeling strong</div><div class="sc-chat-b sc-chat-t">Your squat form was perfect today</div></div></div><span class="sc-cap">In-App Chat</span></div>
     </div>
   </div>
 </section>
 
-<!-- FOR TRAINERS -->
+<!-- ═══════════════════════ TRAINERS ═══════════════════════ -->
 <section class="sec" id="trainers">
-  <div class="orb orb-split" aria-hidden="true"></div>
+  <div class="orb orb-sec" style="left:-250px;top:20%" aria-hidden="true"></div>
   <div class="w split">
     <div class="split-txt an" data-d="0">
       <span class="tag">For Trainers</span>
       <h2>Your coaching,<br><em>amplified.</em></h2>
-      <p class="split-d">Stop juggling spreadsheets, WhatsApp groups, and PDF meal plans. Manage every client from one professional platform.</p>
-      <ul class="checks"><li><i>✓</i>Build plans from 1,300+ exercises with GIF previews</li><li><i>✓</i>Create meal plans with auto macro calculation</li><li><i>✓</i>Monitor every trainee's progress in real time</li><li><i>✓</i>In-app messaging — no more scattered chats</li><li><i>✓</i>AI workout generation to save hours</li><li><i>✓</i>Shareable invite link for new clients</li></ul>
+      <p class="split-d">Stop juggling spreadsheets, WhatsApp groups, and PDF meal plans. Manage every client from one platform.</p>
+      <ul class="checks"><li><i>✓</i>Build plans from 1,300+ exercises with GIF previews</li><li><i>✓</i>Create meal plans with auto macro calculation</li><li><i>✓</i>Monitor every trainee's progress in real time</li><li><i>✓</i>In-app messaging — no scattered chats</li><li><i>✓</i>AI workout generation to save hours</li><li><i>✓</i>Shareable invite link for new clients</li></ul>
     </div>
-    <div class="split-vis an" data-p="0.04" data-d="2">
-      <div class="panel"><div class="panel-bar"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="panel-t">Client Dashboard</span></div><div class="panel-body">
-        <div class="cl"><div class="cl-av" style="--h:40"></div><div class="cl-i"><b>Ahmed K.</b><span>Upper/Lower · Week 4</span></div><div class="badge badge-g">On Track</div></div>
-        <div class="cl"><div class="cl-av" style="--h:200"></div><div class="cl-i"><b>Noura M.</b><span>Full Body · Week 2</span></div><div class="badge badge-y">New</div></div>
-        <div class="cl"><div class="cl-av" style="--h:120"></div><div class="cl-i"><b>Omar S.</b><span>PPL Split · Week 8</span></div><div class="badge badge-g">On Track</div></div>
-        <div class="cl cl-last"><div class="cl-av" style="--h:300"></div><div class="cl-i"><b>Layla H.</b><span>Muscle Gain · Week 6</span></div><div class="badge badge-b">Review</div></div>
+    <div class="split-vis an" data-d="2" data-speed="0.04">
+      <div class="panel" data-tilt="5"><div class="panel-bar"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="panel-t">Client Dashboard</span></div><div class="panel-body">
+        <div class="cl"><div class="cl-av" style="--h:40"></div><div class="cl-i"><b>Ahmed K.</b><small>Upper/Lower · Week 4</small></div><div class="badge badge-g">On Track</div></div>
+        <div class="cl"><div class="cl-av" style="--h:200"></div><div class="cl-i"><b>Noura M.</b><small>Full Body · Week 2</small></div><div class="badge badge-y">New</div></div>
+        <div class="cl"><div class="cl-av" style="--h:120"></div><div class="cl-i"><b>Omar S.</b><small>PPL Split · Week 8</small></div><div class="badge badge-g">On Track</div></div>
+        <div class="cl cl-last"><div class="cl-av" style="--h:300"></div><div class="cl-i"><b>Layla H.</b><small>Muscle Gain · Week 6</small></div><div class="badge badge-b">Review</div></div>
       </div></div>
     </div>
   </div>
 </section>
 
-<!-- FOR TRAINEES -->
+<!-- ═══════════════════════ TRAINEES ═══════════════════════ -->
 <section class="sec sec-alt" id="trainees">
   <div class="w split split-rev">
     <div class="split-txt an" data-d="0">
       <span class="tag">For Trainees</span>
       <h2>Your program,<br><em>your pocket.</em></h2>
-      <p class="split-d">No more screenshots of workout plans. Everything your trainer prescribes — updated in real time.</p>
+      <p class="split-d">Everything your trainer prescribes — updated in real time. No more screenshots or PDF plans.</p>
       <ul class="checks"><li><i>✓</i>Daily schedule with set-by-set logging</li><li><i>✓</i>Meal plans with per-ingredient breakdowns</li><li><i>✓</i>Supplement reminders by time of day</li><li><i>✓</i>Progress tracking — streaks, PRs, metrics</li><li><i>✓</i>Direct messaging with your coach</li><li><i>✓</i>Works fully offline — syncs when back</li></ul>
     </div>
-    <div class="split-vis an" data-p="0.04" data-d="2">
-      <div class="panel"><div class="panel-bar"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="panel-t">Today's Schedule</span></div><div class="panel-body">
-        <div class="sc-r"><div class="sc-t">6:30 AM</div><div class="sc-c"><b>Pre-Workout</b><span>Creatine · Caffeine</span></div></div>
-        <div class="sc-r sc-r-a"><div class="sc-t">7:00 AM</div><div class="sc-c"><b>Upper Body Push</b><span>6 exercises · ~45 min</span></div><div class="sc-live">LIVE</div></div>
-        <div class="sc-r"><div class="sc-t">8:30 AM</div><div class="sc-c"><b>Breakfast</b><span>Oats, eggs, avocado · 640 kcal</span></div></div>
-        <div class="sc-r sc-r-last"><div class="sc-t">12:30 PM</div><div class="sc-c"><b>Lunch</b><span>Chicken, rice, broccoli · 720 kcal</span></div></div>
+    <div class="split-vis an" data-d="2" data-speed="0.04">
+      <div class="panel" data-tilt="5"><div class="panel-bar"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="panel-t">Today's Schedule</span></div><div class="panel-body">
+        <div class="sr"><div class="sr-t">6:30 AM</div><div class="sr-c"><b>Pre-Workout</b><small>Creatine · Caffeine</small></div></div>
+        <div class="sr sr-a"><div class="sr-t">7:00 AM</div><div class="sr-c"><b>Upper Body Push</b><small>6 exercises · ~45 min</small></div><div class="sr-live">LIVE</div></div>
+        <div class="sr"><div class="sr-t">8:30 AM</div><div class="sr-c"><b>Breakfast</b><small>Oats, eggs, avocado · 640 kcal</small></div></div>
+        <div class="sr sr-last"><div class="sr-t">12:30 PM</div><div class="sr-c"><b>Lunch</b><small>Chicken, rice, broccoli · 720 kcal</small></div></div>
       </div></div>
     </div>
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
+<!-- ═══════════════════════ TESTIMONIALS ═══════════════════════ -->
 <section class="sec sec-test">
   <div class="w">
-    <header class="sec-hd an" data-p="-0.05" data-d="0"><span class="tag">Early Feedback</span><h2>What our beta users<br><em>are saying.</em></h2></header>
+    <header class="sec-hd an" data-d="0"><span class="tag">Early Feedback</span><h2>What our beta users<br><em>are saying.</em></h2></header>
     <div class="test-grid">
-      <div class="test-card an" data-scroll-scale data-d="0">
-        <div class="test-q">"</div>
-        <p>FitBook replaced 4 different apps for me. I manage all my clients, their programs, meals, and communication in one place. Game changer.</p>
-        <div class="test-who"><div class="test-av" style="--h:40">AK</div><div><b>Ahmed K.</b><span>Coach · 12 clients</span></div></div>
-      </div>
-      <div class="test-card an" data-scroll-scale data-d="1">
-        <div class="test-q">"</div>
-        <p>I used to get my workout plan as a PDF. Now I open FitBook and everything is there — exercises, sets, even my meals. It's like having my trainer in my pocket.</p>
-        <div class="test-who"><div class="test-av" style="--h:200">NM</div><div><b>Noura M.</b><span>Trainee · 3 months</span></div></div>
-      </div>
-      <div class="test-card an" data-scroll-scale data-d="2">
-        <div class="test-q">"</div>
-        <p>The AI workout generation alone saves me 2 hours a week. I customize the output and assign it to clients in minutes. The app feels premium.</p>
-        <div class="test-who"><div class="test-av" style="--h:120">OS</div><div><b>Omar S.</b><span>Coach · 8 clients</span></div></div>
-      </div>
+      <div class="test-c an" data-d="0" data-tilt="6"><div class="test-q">"</div><p>FitBook replaced 4 different apps for me. I manage all my clients, programs, meals, and communication in one place.</p><div class="test-w"><div class="test-av" style="--h:40">AK</div><div><b>Ahmed K.</b><small>Coach · 12 clients</small></div></div></div>
+      <div class="test-c an" data-d="1" data-tilt="6"><div class="test-q">"</div><p>I used to get my workout plan as a PDF. Now I open FitBook and everything is there — exercises, sets, even my meals.</p><div class="test-w"><div class="test-av" style="--h:200">NM</div><div><b>Noura M.</b><small>Trainee · 3 months</small></div></div></div>
+      <div class="test-c an" data-d="2" data-tilt="6"><div class="test-q">"</div><p>The AI workout generation saves me 2 hours a week. I customize the output and assign to clients in minutes. Premium feel.</p><div class="test-w"><div class="test-av" style="--h:120">OS</div><div><b>Omar S.</b><small>Coach · 8 clients</small></div></div></div>
     </div>
   </div>
 </section>
 
-<!-- WAITLIST -->
+<!-- ═══════════════════════ WAITLIST ═══════════════════════ -->
 <section class="sec sec-wl" id="waitlist">
-  <div class="orb orb-wl-1" aria-hidden="true"></div>
-  <div class="orb orb-wl-2" aria-hidden="true"></div>
+  <div class="orb orb-wl" aria-hidden="true"></div>
+  <div class="orb orb-wl2" aria-hidden="true"></div>
   <div class="w">
     <div class="wl an" data-d="0">
       <span class="tag">Early Access</span>
@@ -363,12 +310,12 @@
       <p class="wl-sub">Join <b>2,400+</b> coaches and athletes already on the waitlist.</p>
       <form class="wl-form" id="wlForm">
         <input type="email" placeholder="you@email.com" required id="wlEmail" class="wl-inp">
-        <button type="submit" class="btn btn-gold wl-btn" id="wlBtn"><span class="wl-t">Join Waitlist</span><span class="wl-ok" hidden>✓ You're in!</span></button>
+        <button type="submit" class="btn btn-gold wl-btn" id="wlBtn" data-magnetic data-hover><span class="wl-t">Join Waitlist</span><span class="wl-ok" hidden>✓ You're in!</span></button>
       </form>
       <small class="wl-fine">No spam, ever. We'll only email when FitBook is ready.</small>
       <div class="stores">
-        <div class="store"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83"/><path d="M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg><div><small>Coming soon on</small><b>App Store</b></div></div>
-        <div class="store"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-1.707l2.572 1.49c.5.29.5 1.01 0 1.3l-2.572 1.49-2.468-2.468 2.468-2.812zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg><div><small>Coming soon on</small><b>Google Play</b></div></div>
+        <div class="store" data-hover data-tilt="8"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83"/><path d="M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg><div><small>Coming soon on</small><b>App Store</b></div></div>
+        <div class="store" data-hover data-tilt="8"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-1.707l2.572 1.49c.5.29.5 1.01 0 1.3l-2.572 1.49-2.468-2.468 2.468-2.812zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg><div><small>Coming soon on</small><b>Google Play</b></div></div>
       </div>
     </div>
   </div>
@@ -378,10 +325,10 @@
 <footer class="ft">
   <div class="w">
     <div class="ft-top">
-      <div class="ft-brand"><a href="#" class="logo"><span class="logo-i"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#060C14" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><path d="M16 8 2 22M17.5 15H9"/></svg></span>FitBook</a><p>The platform for serious coaching.<br>Built in Riyadh, Saudi Arabia.</p></div>
-      <div class="ft-col"><h4>Product</h4><a href="#features">Features</a><a href="#how">How It Works</a><a href="#waitlist">Early Access</a></div>
-      <div class="ft-col"><h4>Audience</h4><a href="#trainers">For Trainers</a><a href="#trainees">For Trainees</a></div>
-      <div class="ft-col"><h4>Legal</h4><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+      <div class="ft-brand"><a href="#" class="logo" data-hover><span class="logo-i"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#060C14" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><path d="M16 8 2 22M17.5 15H9"/></svg></span>FitBook</a><p>The platform for serious coaching.<br>Built in Riyadh, Saudi Arabia.</p></div>
+      <div class="ft-col"><h4>Product</h4><a href="#features" data-hover>Features</a><a href="#how" data-hover>How It Works</a><a href="#waitlist" data-hover>Early Access</a></div>
+      <div class="ft-col"><h4>Audience</h4><a href="#trainers" data-hover>For Trainers</a><a href="#trainees" data-hover>For Trainees</a></div>
+      <div class="ft-col"><h4>Legal</h4><a href="#" data-hover>Privacy Policy</a><a href="#" data-hover>Terms of Service</a></div>
     </div>
     <div class="ft-bot">&copy; 2026 FitBook. All rights reserved.</div>
   </div>
