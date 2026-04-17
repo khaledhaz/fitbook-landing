@@ -316,10 +316,12 @@
   var heroGrid = document.querySelector('.hero-grid');
   var phoneFrame = document.getElementById('phoneFrame');
   var scrollBar = document.getElementById('scrollBar');
+  var curGlow = document.getElementById('curGlow');
   var phoneL = document.querySelector('.phone-l');
   var phoneR = document.querySelector('.phone-r');
   var parallaxEls = document.querySelectorAll('[data-speed]');
   var pmX = 0, pmY = 0;
+  var glowX = 0, glowY = 0;
   var docH = document.documentElement.scrollHeight - H;
 
   function masterLoop() {
@@ -346,6 +348,13 @@
         dotY += (curY - dotY) * 0.28;
         curRing.style.transform = 'translate(' + (ringX - 18) + 'px,' + (ringY - 18) + 'px)';
         curDot.style.transform = 'translate(' + (dotX - 3) + 'px,' + (dotY - 3) + 'px)';
+      }
+
+      // Page-wide cursor glow — illuminates surfaces
+      if (curGlow) {
+        glowX += (curX - glowX) * 0.06;
+        glowY += (curY - glowY) * 0.06;
+        curGlow.style.transform = 'translate(' + (glowX - 300) + 'px,' + (glowY - 300) + 'px)';
       }
 
       // Orbs track mouse
