@@ -379,10 +379,190 @@ body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
 .ft-col a{font-size:14px;color:var(--t2);transition:color .25s}.ft-col a:hover{color:var(--gold)}
 .ft-bot{padding-top:32px;border-top:1px solid var(--b);font-size:13px;color:var(--t4)}
 
-/* ── ANIMATIONS ─────────────────────────────────────────────── */
-.an{opacity:0;transform:translateY(36px);transition:opacity .7s var(--eo),transform .7s var(--eo)}
-.an[data-d="1"]{transition-delay:.1s}.an[data-d="2"]{transition-delay:.2s}.an[data-d="3"]{transition-delay:.3s}.an[data-d="4"]{transition-delay:.4s}.an[data-d="5"]{transition-delay:.5s}
+/* ══════════════════════════════════════════════════════════════
+   3D EFFECTS & ANIMATIONS
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Scroll reveal with 3D entrance ─── */
+.an{opacity:0;transform:translateY(48px) perspective(800px) rotateX(4deg);transition:opacity .8s var(--eo),transform .8s var(--eo);will-change:opacity,transform}
+.an[data-d="1"]{transition-delay:.12s}.an[data-d="2"]{transition-delay:.24s}.an[data-d="3"]{transition-delay:.36s}.an[data-d="4"]{transition-delay:.48s}.an[data-d="5"]{transition-delay:.6s}
 .an.v{opacity:1;transform:none}
+
+/* ── Floating geometric shapes ──────── */
+.float-shape{position:absolute;pointer-events:none;will-change:transform}
+.fs-ring{border:2px solid rgba(240,181,29,.08);border-radius:50%}
+.fs-diamond{background:rgba(240,181,29,.04);transform:rotate(45deg)}
+.fs-cross{width:20px;height:20px;position:absolute}
+.fs-cross::before,.fs-cross::after{content:'';position:absolute;background:rgba(240,181,29,.06);border-radius:1px}
+.fs-cross::before{width:100%;height:2px;top:50%;left:0;transform:translateY(-50%)}
+.fs-cross::after{width:2px;height:100%;left:50%;top:0;transform:translateX(-50%)}
+.fs-dot{border-radius:50%;background:rgba(240,181,29,.1)}
+
+.fs-1{width:80px;height:80px;top:18%;right:15%}
+.fs-2{width:16px;height:16px;top:30%;left:12%}
+.fs-3{top:55%;right:8%}
+.fs-4{width:50px;height:50px;bottom:25%;left:8%}
+.fs-5{width:6px;height:6px;top:22%;left:35%}
+.fs-6{width:12px;height:12px;bottom:35%;right:25%}
+
+@keyframes floatShape{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  25%{transform:translateY(-20px) rotate(5deg)}
+  50%{transform:translateY(-8px) rotate(-3deg)}
+  75%{transform:translateY(-25px) rotate(4deg)}
+}
+
+/* ── Enhanced phone 3D ─────────────── */
+.phone-main .ph-frame{
+  transform-style:preserve-3d;
+  transition:transform .1s linear;
+}
+.phone-main{
+  transform-style:preserve-3d;
+  animation:float3d 6s ease-in-out infinite;
+}
+@keyframes float3d{
+  0%,100%{transform:translateY(0) rotateX(0deg) rotateY(0deg)}
+  33%{transform:translateY(-12px) rotateX(1deg) rotateY(-2deg)}
+  66%{transform:translateY(-6px) rotateX(-1deg) rotateY(1deg)}
+}
+.phone-side{transition:all .6s var(--ease)}
+.phone-left{transform:perspective(1000px) rotateY(20deg) translateX(30px) translateZ(-80px) scale(.78);filter:brightness(.7)}
+.phone-right{transform:perspective(1000px) rotateY(-20deg) translateX(-30px) translateZ(-80px) scale(.78);filter:brightness(.7)}
+.phones:hover .phone-left{transform:perspective(1000px) rotateY(14deg) translateX(20px) translateZ(-50px) scale(.82);filter:brightness(.8)}
+.phones:hover .phone-right{transform:perspective(1000px) rotateY(-14deg) translateX(-20px) translateZ(-50px) scale(.82);filter:brightness(.8)}
+
+/* phone screen inner elements get subtle depth */
+.ph-workout-card{transform:translateZ(2px);transition:transform .3s}
+.ph-stats-row .ph-mini{transition:transform .3s var(--ease)}
+.ph-mini:hover{transform:translateY(-2px) scale(1.03)}
+
+/* phone reflection line */
+.ph-frame::after{
+  content:'';position:absolute;top:10%;left:10%;right:60%;bottom:70%;
+  background:linear-gradient(140deg,rgba(255,255,255,.06),transparent);
+  border-radius:30px;pointer-events:none;
+}
+
+/* ── Feature card 3D depth ─────────── */
+.fc{
+  transform-style:preserve-3d;
+  transition:all .5s var(--ease);
+}
+.fc-visual{transform:translateZ(20px)}
+.fc h3{transform:translateZ(10px)}
+.fc p{transform:translateZ(5px)}
+.fc:hover .fc-visual{transform:translateZ(30px)}
+
+/* inner app mockup shimmer on hover */
+.mini-app{transition:all .4s var(--ease);position:relative;overflow:hidden}
+.mini-app::after{
+  content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+  background:linear-gradient(60deg,transparent 40%,rgba(255,255,255,.03) 50%,transparent 60%);
+  transition:transform .8s;transform:translateX(-100%);pointer-events:none;
+}
+.fc:hover .mini-app::after{transform:translateX(60%)}
+.fc:hover .mini-app{border-color:rgba(240,181,29,.12);box-shadow:0 4px 16px rgba(0,0,0,.3)}
+
+/* ── How-it-works scene 3D hover ───── */
+.how-scene{
+  transform-style:preserve-3d;
+  transition:all .5s var(--ease);
+}
+.how-step:hover .how-scene{
+  transform:perspective(500px) rotateY(-5deg) rotateX(5deg) scale(1.05);
+  box-shadow:0 20px 48px rgba(0,0,0,.35),0 0 0 1px rgba(240,181,29,.08);
+}
+
+/* ── Panel 3D tilt ─────────────────── */
+.panel{
+  transform-style:preserve-3d;
+  transition:transform .5s var(--ease),box-shadow .5s var(--ease);
+}
+.panel:hover{
+  transform:perspective(1000px) rotateX(2deg) rotateY(-2deg) translateY(-8px);
+  box-shadow:0 56px 112px rgba(0,0,0,.45),0 0 0 1px rgba(240,181,29,.08),inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+/* ── Testimonial card glass + 3D ───── */
+.test-card{
+  transform-style:preserve-3d;
+  transition:all .5s var(--ease);
+}
+.test-card:hover{
+  transform:perspective(800px) rotateX(2deg) translateY(-8px);
+  box-shadow:0 32px 72px rgba(0,0,0,.35),0 0 32px var(--g03);
+  border-color:rgba(240,181,29,.15);
+}
+.test-card .test-q{transform:translateZ(10px)}
+.test-card p{transform:translateZ(5px)}
+
+/* ── Showcase phone 3D tilt ────────── */
+.sc-phone{perspective:800px}
+.sc-frame{
+  transition:transform .5s var(--ease),box-shadow .5s var(--ease);
+}
+.sc-phone:hover .sc-frame{
+  transform:translateY(-12px) rotateX(4deg) scale(1.03);
+  box-shadow:0 36px 64px rgba(0,0,0,.5),0 0 0 1px rgba(240,181,29,.06);
+}
+.sc-phone:nth-child(even) .sc-frame{transform:rotateY(-3deg)}
+.sc-phone:nth-child(even):hover .sc-frame{transform:translateY(-12px) rotateY(-1deg) scale(1.03)}
+
+/* ── Button 3D press effect ────────── */
+.btn-gold{
+  transform-style:preserve-3d;
+  box-shadow:0 2px 8px rgba(0,0,0,.3),0 8px 32px var(--g06),inset 0 1px 0 rgba(255,255,255,.2);
+}
+.btn-gold:active{
+  transform:translateY(1px) scale(0.98)!important;
+  box-shadow:0 1px 4px rgba(0,0,0,.3),0 2px 8px var(--g06);
+}
+
+/* ── Stat strip: subtle glow pulse ─── */
+.stat-i b{
+  text-shadow:0 0 40px var(--g10);
+  transition:text-shadow .4s;
+}
+.stat-i:hover b{
+  text-shadow:0 0 60px rgba(240,181,29,.2);
+}
+
+/* ── Waitlist input glow animation ─── */
+.wl-inp:focus{
+  animation:inputPulse 2s ease-in-out infinite;
+}
+@keyframes inputPulse{
+  0%,100%{box-shadow:0 0 0 4px var(--g06)}
+  50%{box-shadow:0 0 0 8px var(--g03)}
+}
+
+/* ── Logo icon continuous subtle spin ── */
+.logo-i{animation:logoSpin 30s linear infinite}
+@keyframes logoSpin{
+  0%{transform:rotate(0deg)}
+  100%{transform:rotate(360deg)}
+}
+.logo:hover .logo-i{animation-play-state:paused;transform:rotate(-8deg) scale(1.08)}
+
+/* ── Decorative animated gradient border on hero card ── */
+.ph-workout-card{position:relative;overflow:hidden}
+.ph-workout-card::before{
+  content:'';position:absolute;top:-1px;left:-1px;right:-1px;bottom:-1px;
+  background:linear-gradient(45deg,var(--gold),transparent 40%,transparent 60%,rgba(240,181,29,.3));
+  border-radius:17px;z-index:-1;
+  animation:borderRotate 4s linear infinite;
+  background-size:300% 300%;
+}
+@keyframes borderRotate{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* ── Typing cursor in AI mockup ──── */
+.ma-cursor{animation:cursorBlink .8s step-end infinite}
+@keyframes cursorBlink{0%,100%{opacity:1}50%{opacity:0}}
 
 /* ══════════════════════════════════════════════════════════════
    RESPONSIVE
@@ -398,6 +578,8 @@ body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
   .test-card{max-width:500px;margin:0 auto}
 }
 @media(max-width:768px){
+  .float-shape{display:none}
+  .an{transform:translateY(32px)}/* simpler entrance on mobile */
   .nav-l,.nav-cta{display:none}.burger{display:flex}
   .nav-l.open{display:flex;flex-direction:column;position:absolute;top:var(--nav);left:0;right:0;background:rgba(6,12,20,.97);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);padding:28px var(--px);gap:22px;border-bottom:1px solid var(--b)}
   .hero-h1{font-size:clamp(36px,10vw,52px)}
