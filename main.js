@@ -14,11 +14,22 @@
   var curX = 0, curY = 0, curDotX = 0, curDotY = 0; // cursor positions
 
   window.addEventListener('scroll', function () { scrollY = window.scrollY; }, { passive: true });
-  if (isDesktop) document.addEventListener('mousemove', function (e) {
-    mouseX = (e.clientX / W - 0.5) * 2;
-    mouseY = (e.clientY / H - 0.5) * 2;
-    curX = e.clientX; curY = e.clientY;
-  }, { passive: true });
+  if (isDesktop) {
+    document.addEventListener('mousemove', function (e) {
+      mouseX = (e.clientX / W - 0.5) * 2;
+      mouseY = (e.clientY / H - 0.5) * 2;
+      curX = e.clientX; curY = e.clientY;
+    }, { passive: true });
+  } else {
+    // Touch: particles react to finger position
+    document.addEventListener('touchmove', function (e) {
+      var t = e.touches[0];
+      curX = t.clientX; curY = t.clientY;
+    }, { passive: true });
+    document.addEventListener('touchend', function () {
+      curX = -9999; curY = -9999; // move attraction offscreen
+    }, { passive: true });
+  }
 
   // ═══════════════════════════════════════════════════════════════
   // SCROLL REVEAL
@@ -114,8 +125,8 @@
   var canvas = document.getElementById('particles');
   var ctx = canvas ? canvas.getContext('2d') : null;
   var particles = [];
-  var PARTICLE_COUNT = isMobile ? 0 : (W < 1080 ? 50 : 90);
-  var CONNECT_DIST = 110;
+  var PARTICLE_COUNT = isMobile ? 30 : (W < 1080 ? 50 : 90);
+  var CONNECT_DIST = isMobile ? 80 : 110;
   var particlesActive = true;
 
   function initParticles() {
@@ -146,15 +157,14 @@
 
     for (var i = 0; i < particles.length; i++) {
       var p = particles[i];
-      // Mouse attraction
-      if (isDesktop) {
-        var dx = mx - p.x, dy = my - p.y;
-        var dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 200 && dist > 0) {
-          var force = (200 - dist) / 200 * 0.02 * p.mag;
-          p.vx += dx / dist * force;
-          p.vy += dy / dist * force;
-        }
+      // Mouse/touch attraction
+      var dx = mx - p.x, dy = my - p.y;
+      var dist = Math.sqrt(dx * dx + dy * dy);
+      var attractDist = isMobile ? 150 : 200;
+      if (dist < attractDist && dist > 0) {
+        var force = (attractDist - dist) / attractDist * (isMobile ? 0.03 : 0.02) * p.mag;
+        p.vx += dx / dist * force;
+        p.vy += dy / dist * force;
       }
 
       p.x += p.vx; p.y += p.vy;
@@ -412,10 +422,35 @@
     requestAnimationFrame(masterLoop);
   }
 
+  // ═══════════════════════════════════════════════════════════════
+  // MOBILE: touch-reactive parallax on hero phone
+  // ═══════════════════════════════════════════════════════════════
+  if (isMobile && !reduceMotion) {
+    var phoneMain = document.getElementById('phoneMain');
+    if (phoneMain) {
+      var lastGamma = 0, lastBeta = 0;
+      window.addEventListener('deviceorientation', function (e) {
+        if (e.gamma === null) return;
+        lastGamma = e.gamma; lastBeta = e.beta;
+      }, { passive: true });
+      // Apply tilt in mobile RAF — subtle device motion
+      var mobilePhoneRaf = function () {
+        var gx = lastGamma * 0.15; // left/right tilt
+        var gy = (lastBeta - 40) * 0.1; // front/back tilt (offset for holding angle)
+        gx = Math.max(-8, Math.min(8, gx));
+        gy = Math.max(-5, Math.min(5, gy));
+        if (phoneFrame) {
+          phoneFrame.style.transform = 'rotateY(' + gx + 'deg) rotateX(' + (-gy) + 'deg)';
+        }
+        requestAnimationFrame(mobilePhoneRaf);
+      };
+      requestAnimationFrame(mobilePhoneRaf);
+    }
+  }
+
   if (!reduceMotion) {
     requestAnimationFrame(masterLoop);
   } else {
-    // Still need nav scroll and scroll bar
     function simpleLoop() {
       nav.classList.toggle('scrolled', scrollY > 40);
       if (scrollBar) { scrollBar.style.transform = 'scaleX(' + (docH > 0 ? scrollY / docH : 0) + ')'; scrollBar.style.width = '100%'; }

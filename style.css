@@ -438,6 +438,7 @@ body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
 .split-vis.v .panel{clip-path:inset(0% 0% 0% 0% round 20px)}
 
 /* ═══════════════════════ RESPONSIVE ═══════════════════════ */
+/* ═══════════════════════ TABLET ═══════════════════════ */
 @media(max-width:1080px){
   .phones{flex-wrap:wrap}.phone-l,.phone-r{display:none}
   .feat-grid{grid-template-columns:repeat(2,1fr)}
@@ -447,28 +448,197 @@ body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
   .panel{max-width:420px;margin:0 auto}
   .test-grid{grid-template-columns:1fr}.test-c{max-width:500px;margin:0 auto}
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE — THIS IS THE PREMIUM EXPERIENCE
+   Not a stripped-down desktop. A purpose-built mobile design.
+   ═══════════════════════════════════════════════════════════════ */
 @media(max-width:768px){
+  /* Reset cursor — touch is the interaction */
   html,body,a,button,input{cursor:auto!important}
   .cur-ring,.cur-dot,.cur-glow{display:none!important}
-  .mesh-bg{display:none}
+
+  /* ── KEEP atmospheric effects — just optimize them ── */
+  /* Mesh blobs stay but smaller and fewer */
+  .mesh-blob{filter:blur(80px);opacity:.5}
+  .mesh-blob-1{width:400px;height:400px}
+  .mesh-blob-2{width:300px;height:300px}
+  .mesh-blob-3,.mesh-blob-4{display:none}
+
+  /* Float shapes: keep 2, hide rest */
   .float-shape{display:none}
-  .an{transform:translateY(32px)}
+  .float-shape:first-child,.float-shape:nth-child(4){display:block;opacity:.5}
+
+  /* Particles: canvas stays — JS already reduces count to 0 on mobile,
+     but we'll enable a small amount via JS override */
+
+  /* ── MOBILE SCROLL REVEALS — smooth, not 3D ── */
+  .an{transform:translateY(28px);transition-duration:.6s}
+  /* Keep choreographed headers */
   .split-vis .panel{clip-path:none}
-  .nav-l,.nav-cta{display:none}.burger{display:flex}
-  .nav-l.open{display:flex;flex-direction:column;position:absolute;top:var(--nav);left:0;right:0;background:rgba(6,12,20,.97);backdrop-filter:blur(28px);padding:28px var(--px);gap:22px;border-bottom:1px solid var(--b)}
-  .hero-h1{font-size:clamp(36px,10vw,52px)}
-  .feat-grid{grid-template-columns:1fr}
-  .how-grid{grid-template-columns:1fr 1fr}
-  .ft-top{grid-template-columns:1fr 1fr;gap:32px}
-  .wl-form{flex-direction:column}.wl-btn{width:100%}
-  .ph-main-frame{width:260px}.ph-scr-main{min-height:420px}.ph-scr{border-radius:34px}
-  .stat-sep{display:none}.stats-row{gap:28px}
+
+  /* ── NAV — full-screen glassmorphism overlay ── */
+  .nav-l,.nav-cta{display:none}
+  .burger{display:flex}
+  .nav-l.open{
+    display:flex;flex-direction:column;
+    position:fixed;top:0;left:0;right:0;bottom:0;
+    background:rgba(6,12,20,.95);
+    backdrop-filter:blur(40px) saturate(180%);
+    -webkit-backdrop-filter:blur(40px) saturate(180%);
+    padding:calc(var(--nav) + 40px) var(--px) 40px;
+    gap:0;z-index:99;
+    justify-content:center;align-items:center;
+  }
+  .nav-l.open a{
+    font-size:28px;font-weight:700;padding:20px 0;
+    text-align:center;width:100%;
+    border-bottom:1px solid var(--b);
+    color:var(--t);
+    opacity:0;animation:mobileNavIn .5s var(--eo) forwards;
+  }
+  .nav-l.open a:nth-child(1){animation-delay:0s}
+  .nav-l.open a:nth-child(2){animation-delay:.08s}
+  .nav-l.open a:nth-child(3){animation-delay:.16s}
+  .nav-l.open a:nth-child(4){animation-delay:.24s}
+  .nav-l.open a:last-child{border:none}
+  @keyframes mobileNavIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+  /* ── HERO — phone takes center stage ── */
+  .hero-wrap{padding-top:calc(var(--nav) + 24px)}
+  .hero-text{padding-bottom:32px}
+  .hero-h1{font-size:clamp(38px,11vw,56px);letter-spacing:-.04em}
+  .hero-p{font-size:16px;margin-bottom:32px}
+  .hero-ctas{gap:12px}
+  .btn-xl{padding:16px 32px;font-size:15px}
+
+  /* Phone: bigger on mobile, it's the star */
+  .ph-main-frame{width:280px}
+  .ph-scr-main{min-height:460px}
+  .ph-scr{border-radius:36px}
+  .phone-main::after{display:none} /* reflection not needed on mobile */
+  .ph-glow{inset:-40px;filter:blur(40px)}
+  .ph-shadow{bottom:-30px;width:80%;height:30px;filter:blur(14px)}
+
+  /* Stats strip — horizontal scroll on mobile */
+  .stats-row{
+    flex-wrap:nowrap;justify-content:flex-start;gap:32px;
+    overflow-x:auto;-webkit-overflow-scrolling:touch;
+    scrollbar-width:none;padding:0 8px;scroll-snap-type:x mandatory;
+  }
+  .stats-row::-webkit-scrollbar{display:none}
+  .stat{flex-shrink:0;scroll-snap-align:center;min-width:120px}
+  .stat-sep{display:none}
+
+  /* ── FEATURES — stacked cards with touch-friendly sizing ── */
+  .feat-grid{grid-template-columns:1fr;gap:16px}
+  .fc{border-radius:24px}
+  .fc-vis{padding:20px 20px 12px}
+  .fc h3{padding:0 20px;font-size:18px}
+  .fc p{padding:0 20px 24px;font-size:15px;line-height:1.7}
+  .mini{min-height:160px;border-radius:16px}
+
+  /* ── HOW IT WORKS — 2×2 grid ── */
+  .how-grid{grid-template-columns:1fr 1fr;gap:16px}
+  .how-step h3{font-size:15px}
+  .how-step p{font-size:12px}
+  .hs{width:100px;height:100px;border-radius:16px}
+
+  /* ── SHOWCASE — bigger phones, snappy scroll ── */
+  .sc-f{width:220px;border-radius:36px}
+  .sc-s{border-radius:30px;min-height:380px;padding:12px}
+  .sc-l{font-size:14px;font-weight:700;padding:6px 0 10px}
+  .sc-scroll{gap:16px;scroll-snap-type:x mandatory}
+  .sc-ph{scroll-snap-align:center}
+  .sc-cap{font-size:13px;margin-top:16px}
+
+  /* ── SPLIT SECTIONS — full width, visuals above text ── */
+  .split{gap:40px}
+  .split-txt{order:2}
+  .split-vis{order:1}
+  .split-rev .split-txt{order:2}
+  .split-rev .split-vis{order:1}
+  .panel{max-width:100%;border-radius:24px}
+  .panel-bar{padding:12px 20px}
+  .panel-body{padding:8px 20px 20px}
+  .split-d{font-size:16px;margin:16px 0 28px}
+  .checks li{font-size:14px}
+
+  /* ── TESTIMONIALS — horizontal scroll cards ── */
+  .test-grid{
+    display:flex;gap:16px;overflow-x:auto;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;
+    scroll-snap-type:x mandatory;padding-bottom:8px;
+  }
+  .test-grid::-webkit-scrollbar{display:none}
+  .test-c{
+    flex-shrink:0;width:85vw;max-width:340px;
+    scroll-snap-align:center;border-radius:24px;
+  }
+  .test-c p{font-size:15px}
+
+  /* ── WAITLIST — full bleed, dramatic ── */
+  .sec-wl{padding:clamp(100px,16vw,200px) 0}
+  .wl h2{font-size:clamp(28px,7vw,40px)}
+  .wl-form{flex-direction:column;gap:12px}
+  .wl-inp{height:56px;border-radius:14px;font-size:16px}
+  .wl-btn{width:100%;height:56px;border-radius:14px}
+  .stores{gap:12px}
+  .store{border-radius:14px;padding:14px 20px;flex:1;justify-content:center}
+
+  /* ── FOOTER — clean mobile layout ── */
+  .ft{padding:48px 0 32px}
+  .ft-top{grid-template-columns:1fr;gap:32px;margin-bottom:40px}
+  .ft-col{gap:12px}
+  .ft-bot{text-align:center}
+
+  /* ── TOUCH INTERACTIONS ── */
+  /* Active states for touch — replace hover with :active */
+  .fc:active{transform:scale(.97);border-color:rgba(240,181,29,.18);transition:all .15s}
+  .btn-gold:active{transform:scale(.95)!important;transition:all .1s}
+  .store:active{transform:scale(.96);border-color:var(--g)}
+  .panel:active{transform:scale(.98)}
+  .test-c:active{transform:scale(.97);border-color:rgba(240,181,29,.12)}
+
+  /* Larger touch targets */
+  .nav-l a,.ft-col a{min-height:44px;display:flex;align-items:center}
+  .checks li{padding:4px 0}
 }
+
+/* ═══════════════════════ SMALL MOBILE ═══════════════════════ */
 @media(max-width:480px){
-  .stats-row{flex-direction:column;gap:20px}
-  .stores{flex-direction:column}.store{justify-content:center}
-  .ft-top{grid-template-columns:1fr}
-  .how-grid{grid-template-columns:1fr}
-  .ph-main-frame{width:230px}.ph-scr{border-radius:28px;padding:0 10px 10px}
-  .sc-f{width:170px;border-radius:28px}.sc-s{border-radius:22px;min-height:300px}
+  .hero-h1{font-size:clamp(34px,10vw,44px)}
+  .pill{font-size:11px;padding:8px 16px;margin-bottom:28px}
+  .hero-p{font-size:15px}
+
+  /* Phone: still big and impressive */
+  .ph-main-frame{width:260px}
+  .ph-scr{border-radius:32px;padding:0 10px 10px}
+
+  /* How grid: single column */
+  .how-grid{grid-template-columns:1fr 1fr}
+  .how-step p{font-size:11px;line-height:1.5}
+
+  /* Showcase phones */
+  .sc-f{width:200px;border-radius:32px}
+  .sc-s{border-radius:26px;min-height:340px}
+
+  /* Footer */
+  .ft-top{gap:24px}
+
+  /* Stores stacked */
+  .stores{flex-direction:column}
+  .store{width:100%}
+
+  /* Stats: swipeable */
+  .stat{min-width:100px}
+  .stat b{font-size:clamp(24px,6vw,36px)}
+}
+
+/* ═══════════════════════ VERY SMALL ═══════════════════════ */
+@media(max-width:375px){
+  .hero-h1{font-size:32px}
+  .ph-main-frame{width:240px}
+  .sc-f{width:180px}
+  .sec-hd h2{font-size:28px}
 }
